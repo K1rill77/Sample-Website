@@ -148,24 +148,41 @@
           <h3>Blotter Form</h3>
           <p>File an incident report</p>
         </div>
+
+        <div class="service-card" data-service="tracking">
+          <h3>My Submissions</h3>
+          <p>Track your requests and complaints</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tracking Container -->
+    <div class="container" id="tracking-container" style="display: none">
+      <div class="header">
+        <h1>My Submissions</h1>
+        <h2>Track your requests and complaints</h2>
       </div>
 
-      <div class="resident-tracking">
-        <h3>My Requests & Complaints</h3>
-        <div class="tracking-tabs">
-          <button type="button" class="tab-btn active" data-tab="requests">
-            My Requests
-          </button>
-          <button type="button" class="tab-btn" data-tab="complaints">
-            My Complaints
-          </button>
-          <button type="button" class="tab-btn" data-tab="blotters">
-            My Blotters
-          </button>
-        </div>
+      <div class="nav-controls">
+        <button type="button" class="back-btn">Back</button>
+        <button type="button" class="logout-btn">Logout</button>
+      </div>
 
-        <div class="tracking-content">
-          <div class="tab-content active" id="requests-tab">
+      <div class="tracking-tabs">
+        <button type="button" class="tab-btn active" data-tab="requests">
+          My Requests
+        </button>
+        <button type="button" class="tab-btn" data-tab="complaints">
+          My Complaints
+        </button>
+        <button type="button" class="tab-btn" data-tab="blotters">
+          My Blotters
+        </button>
+      </div>
+
+      <div class="tracking-content">
+        <div class="tab-content active" id="requests-tab">
+          <div class="table-container">
             <table class="tracking-table">
               <thead>
                 <tr>
@@ -178,8 +195,10 @@
               <tbody id="requests-list"></tbody>
             </table>
           </div>
+        </div>
 
-          <div class="tab-content" id="complaints-tab">
+        <div class="tab-content" id="complaints-tab">
+          <div class="table-container">
             <table class="tracking-table">
               <thead>
                 <tr>
@@ -192,8 +211,10 @@
               <tbody id="complaints-list"></tbody>
             </table>
           </div>
+        </div>
 
-          <div class="tab-content" id="blotters-tab">
+        <div class="tab-content" id="blotters-tab">
+          <div class="table-container">
             <table class="tracking-table">
               <thead>
                 <tr>
@@ -510,51 +531,57 @@
 
           <div class="submission-content">
             <div class="tab-content active" id="requests-tab-staff">
-              <table class="submission-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Resident</th>
-                    <th>Type</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="staff-requests-list"></tbody>
-              </table>
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="staff-requests-list"></tbody>
+                </table>
+              </div>
             </div>
 
             <div class="tab-content" id="complaints-tab-staff">
-              <table class="submission-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Resident</th>
-                    <th>Type</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="staff-complaints-list"></tbody>
-              </table>
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="staff-complaints-list"></tbody>
+                </table>
+              </div>
             </div>
 
             <div class="tab-content" id="blotters-tab-staff">
-              <table class="submission-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Resident</th>
-                    <th>Type</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="staff-blotters-list"></tbody>
-              </table>
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="staff-blotters-list"></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
