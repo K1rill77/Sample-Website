@@ -596,6 +596,8 @@
 
       <div class="nav-controls">
         <button type="button" class="logout-btn">Logout</button>
+        <button type="button" class="admin-nav-btn active" data-page="dashboard">Dashboard</button>
+        <button type="button" class="admin-nav-btn" data-page="status-board">Status Board</button>
       </div>
 
       <div class="dashboard">
@@ -649,6 +651,68 @@
 
             <button type="submit" class="btn">Send Email</button>
           </form>
+        </div>
+
+        <div class="admin-status-board" id="admin-status-board" style="display: none;">
+          <h2>Status Board</h2>
+          <div class="submission-tabs">
+            <button type="button" class="tab-btn active" data-tab="requests">Requests</button>
+            <button type="button" class="tab-btn" data-tab="complaints">Complaints</button>
+            <button type="button" class="tab-btn" data-tab="blotters">Blotters</button>
+          </div>
+
+          <div class="submission-content">
+            <div class="tab-content active" id="requests-tab-admin">
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-requests-list"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-content" id="complaints-tab-admin">
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-complaints-list"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-content" id="blotters-tab-admin">
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-blotters-list"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
