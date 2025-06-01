@@ -566,6 +566,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const itemIndex = items.findIndex((item) => item.id === id);
       if (itemIndex !== -1) {
         items[itemIndex].status = newStatus;
+        // Add who updated this
+        items[itemIndex].updatedBy = currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "Staff";
 
         // Save back to localStorage
         if (type === "request") {
@@ -585,6 +587,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Load admin dashboard
   function loadAdminDashboard() {
     const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+    requests = JSON.parse(localStorage.getItem("requests")) || [];
+    complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    blotters = JSON.parse(localStorage.getItem("blotters")) || [];
 
     // Update counts
     document.getElementById("total-users").textContent = allUsers.length;
@@ -607,5 +612,108 @@ document.addEventListener("DOMContentLoaded", function () {
             `<option value="${user.email}">${user.firstName} ${user.lastName} (${user.email})</option>`
         )
         .join("");
+
+    // Load status board
+    loadAdminStatusBoard();
+
+    // Admin navigation button handlers
+    document.querySelectorAll(".admin-nav-btn").forEach((btn) => {
+      btn.addEventListener("click", function() {
+        const page = this.getAttribute("data-page");
+        
+        // Update active button
+        document.querySelectorAll(".admin-nav-btn").forEach(b => b.classList.remove("active"));
+        this.classList.add("active");
+        
+        // Show the correct page
+        if (page === "dashboard") {
+          document.querySelector(".admin-actions").style.display = "block";
+          document.getElementById("admin-status-board").style.display = "none";
+        } else {
+          document.querySelector(".admin-actions").style.display = "none";
+          document.getElementById("admin-status-board").style.display = "block";
+          loadAdminStatusBoard();
+        }
+      });
+    });
+
+    // Tab switching for admin status board
+    document.querySelectorAll("#admin-status-board .tab-btn").forEach((btn) => {
+      btn.addEventListener("click", function() {
+        const tabId = this.getAttribute("data-tab");
+
+        // Update active tab button
+        document.querySelectorAll("#admin-status-board .tab-btn").forEach((b) => b.classList.remove("active"));
+        this.classList.add("active");
+
+        // Update active tab content
+        document.querySelectorAll("#admin-status-board .tab-content").forEach((content) => {
+          content.classList.remove("active");
+        });
+        document.getElementById(`${tabId}-tab-admin`).classList.add("active");
+      });
+    });
+  }
+
+  // Load admin status board function
+  function loadAdminStatusBoard() {
+    const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+    requests = JSON.parse(localStorage.getItem("requests")) || [];
+    complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    blotters = JSON.parse(localStorage.getItem("blotters")) || [];
+
+    // Populate requests table
+    const requestsList = document.getElementById("admin-requests-list");
+    requestsList.innerHTML = requests
+      .map((req) => {
+        const user = allUsers.find((u) => u.email === req.email) || {};
+        return `
+          <tr>
+            <td>${req.id}</td>
+            <td>${user.firstName || ""} ${user.lastName || ""}</td>
+            <td>${req.type}</td>
+            <td>${new Date(req.date).toLocaleDateString()}</td>
+            <td class="status-${req.status}">${req.status}</td>
+            <td>${req.updatedBy || "N/A"}</td>
+          </tr>
+        `;
+      })
+      .join("");
+
+    // Populate complaints table
+    const complaintsList = document.getElementById("admin-complaints-list");
+    complaintsList.innerHTML = complaints
+      .map((comp) => {
+        const user = allUsers.find((u) => u.email === comp.email) || {};
+        return `
+          <tr>
+            <td>${comp.id}</td>
+            <td>${user.firstName || ""} ${user.lastName || ""}</td>
+            <td>${comp.type}</td>
+            <td>${new Date(comp.date).toLocaleDateString()}</td>
+            <td class="status-${comp.status}">${comp.status}</td>
+            <td>${comp.updatedBy || "N/A"}</td>
+          </tr>
+        `;
+      })
+      .join("");
+
+    // Populate blotters table
+    const blottersList = document.getElementById("admin-blotters-list");
+    blottersList.innerHTML = blotters
+      .map((blot) => {
+        const user = allUsers.find((u) => u.email === blot.email) || {};
+        return `
+          <tr>
+            <td>${blot.id}</td>
+            <td>${user.firstName || ""} ${user.lastName || ""}</td>
+            <td>${blot.incidentType}</td>
+            <td>${new Date(blot.date).toLocaleDateString()}</td>
+            <td class="status-${blot.status}">${blot.status}</td>
+            <td>${blot.updatedBy || "N/A"}</td>
+          </tr>
+        `;
+      })
+      .join("");
   }
 });
