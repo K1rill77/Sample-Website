@@ -273,6 +273,7 @@
           <div class="form-group">
             <label for="gender">Gender</label>
             <select id="gender">
+              <option value="" selected disabled>Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -287,7 +288,6 @@
     <!-- Complaint Form Container -->
     <div class="container" id="complaint-form-container" style="display: none">
       <div class="header">
-        <h1>Home | Services | Barangay Website</h1>
         <h2>Complaint Form</h2>
       </div>
 
@@ -350,7 +350,6 @@
     <!-- Blotter Form Container -->
     <div class="container" id="blotter-form-container" style="display: none">
       <div class="header">
-        <h1>User Blotter</h1>
         <h2>Blotter Form</h2>
       </div>
 
@@ -361,18 +360,22 @@
 
       <form id="blotter-form">
         <div class="form-section">
-          <h3>Main Complaint</h3>
+          <h3>People Involve</h3>
           <div class="form-group">
-            <label for="main-complaint">Overview</label>
-            <textarea id="main-complaint" rows="3"></textarea>
-          </div>
-        </div>
+            <label for="main-complaint">Main Complainant</label>
+            <textarea id="main-complaint" rows="1"></textarea>
 
-        <div class="form-section">
-          <h3>Other Complaint</h3>
-          <div class="form-group">
-            <label for="other-complaint">Responsions</label>
-            <textarea id="other-complaint" rows="2"></textarea>
+            <label for="other-complaint">Other Complainant</label>
+            <textarea id="other-complainant" rows="1"></textarea>
+
+            <label for="officials">Officials On-site</label>
+            <textarea id="officials" rows="1"></textarea>
+
+            <label for="attacker">Attacker</label>
+            <textarea id="attacker" rows="1"></textarea>
+
+            <label for="victims">Victims</label>
+            <textarea id="victims" rows="1"></textarea>
           </div>
         </div>
 
@@ -387,6 +390,7 @@
             <div class="form-group">
               <label for="incident-type">Incident Type</label>
               <select id="incident-type">
+                <option value="" selected disabled>Type of Incident</option>
                 <option value="theft">Theft</option>
                 <option value="dispute">Dispute</option>
                 <option value="damage">Property Damage</option>
@@ -404,6 +408,16 @@
             <div class="form-group">
               <label for="incident-time">Time of incident</label>
               <input type="time" id="incident-time" />
+            </div>
+
+            <div class="form-group">
+              <label for="reported-date">Date Reported</label>
+              <input type="date" id="reported-date" />
+            </div>
+
+            <div class="form-group">
+              <label for="reported-time">Time Reported</label>
+              <input type="time" id="reported-time" />
             </div>
           </div>
         </div>
