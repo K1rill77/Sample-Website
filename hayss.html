@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barangay Management System</title>
+    <link rel="stylesheet" href="eme.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Role Selection Container -->
+    <div class="container" id="role-selection-container" style="display: flex;">
+      <div class="left-section">
+        <img src="C:\Users\asuz laptop\OneDrive\Documents\GitHub\Sample-Website\images\Logo.png" alt="Barangay Longos Logo" class="logo">
+        <h1 class="website-title">Barangay Management System</h1>
+        <p class="description">Access and manage essential barangay services online. Submit requests, complaints, and stay updated with Barangay Longos, Malabon City.</p>
+      </div>
+
+      <div class="right-section">
+        <h2 class="header-greeting">Magandang Araw, Logosians!</h2>
+        <p class="header-instruction">Click or Tap User Type</p>
+
+      <div class="role-options">
+         <div class="role-card" data-role="resident">
+          <h3>Resident</h3>
+         </div>
+
+         <div class="role-card" data-role="staff">
+          <h3>Barangay Staff</h3>
+         </div>
+
+         <div class="role-card" data-role="admin">
+          <h3>Admin</h3>
+         </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="container" id="login-container">
+      <div class="left-section">
+        <img src="C:\Users\asuz laptop\OneDrive\Documents\GitHub\Sample-Website\images\Logo.png" alt="Barangay Longos Logo" class="logo">
+        <h1 class="website-title">Barangay Management System</h1>
+        <p class="description">Access and manage essential barangay services online. Submit requests, complaints, and stay updated with Barangay Longos, Malabon City.</p>
+      </div>
+
+    <div class="right-section">
+        <h2 class="header-greeting">Log In</h2>
+
+      <div class="form-container">
+        <form id="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required />
+          </div>
+
+          <div>
+            <a href="#" id="forgot-password">Forgot Password?</a>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="login-btn">Log In</button>
+            <button type="button" class="create-acc-btn" id="show-signup">Create Account</button>
+          </div>
+        </form>
+
+        <div class="social-login-separator">
+            <p>or Log in with</p>
+        </div>
+
+        <div class="social-login-options">
+            <button class="social-btn google-btn">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.9996 19.6363V28.9309H36.916C36.3488 31.9199 34.6468 34.4509 32.0941 36.1527L39.8831 42.1964C44.4213 38.0075 47.0395 31.8547 47.0395 24.5456C47.0395 22.8438 46.8868 21.2073 46.6031 19.6366L23.9996 19.6363Z" fill="#4285F4"/>
+                  <path d="M10.5494 28.568L8.79263 29.9128L2.57434 34.7564C6.52342 42.589 14.6174 48 23.9991 48C30.4789 48 35.9116 45.8618 39.8826 42.1964L32.0936 36.1528C29.9554 37.5927 27.2281 38.4656 23.9991 38.4656C17.7591 38.4656 12.4575 34.2547 10.5592 28.5819L10.5494 28.568Z" fill="#34A853"/>
+                  <path d="M2.57436 13.2436C0.938084 16.4726 0 20.1163 0 23.9999C0 27.8834 0.938084 31.5271 2.57436 34.7561C2.57436 34.7777 10.5599 28.5597 10.5599 28.5597C10.08 27.1197 9.79624 25.5925 9.79624 23.9996C9.79624 22.4067 10.08 20.8795 10.5599 19.4395L2.57436 13.2436Z" fill="#FBBC05"/>
+                  <path d="M23.9996 9.55636C27.5342 9.55636 30.676 10.7781 33.1851 13.1345L40.0577 6.2619C35.8904 2.37833 30.4797 0 23.9996 0C14.6179 0 6.52342 5.38908 2.57434 13.2437L10.5597 19.44C12.4578 13.7672 17.7596 9.55636 23.9996 9.55636Z" fill="#EA4335"/>
+                </svg>
+            </button>
+            <button class="social-btn facebook-btn">
+                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6">
+                    <title>Facebook</title>
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup Container -->
+    <div class="container" id="signup-container">
+      <div class="form-container">
+        <div class="header">
+        <h1>Create an Account</h1>
+        </div>
+        <form id="signup-form">
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="user-type">Type of User</label>
+            <select id="user-type" required>
+              <option value="" selected disabled>Select User Type</option>
+              <option value="resident">Resident</option>
+              <option value="staff">Barangay Staff</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" required />
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" required />
+          </div>
+
+          <div class="social-login-separator">
+            <p>or Log in with</p>
+          </div>
+
+        <div class="social-login-options">
+            <button class="social-btn google-btn">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.9996 19.6363V28.9309H36.916C36.3488 31.9199 34.6468 34.4509 32.0941 36.1527L39.8831 42.1964C44.4213 38.0075 47.0395 31.8547 47.0395 24.5456C47.0395 22.8438 46.8868 21.2073 46.6031 19.6366L23.9996 19.6363Z" fill="#4285F4"/>
+                  <path d="M10.5494 28.568L8.79263 29.9128L2.57434 34.7564C6.52342 42.589 14.6174 48 23.9991 48C30.4789 48 35.9116 45.8618 39.8826 42.1964L32.0936 36.1528C29.9554 37.5927 27.2281 38.4656 23.9991 38.4656C17.7591 38.4656 12.4575 34.2547 10.5592 28.5819L10.5494 28.568Z" fill="#34A853"/>
+                  <path d="M2.57436 13.2436C0.938084 16.4726 0 20.1163 0 23.9999C0 27.8834 0.938084 31.5271 2.57436 34.7561C2.57436 34.7777 10.5599 28.5597 10.5599 28.5597C10.08 27.1197 9.79624 25.5925 9.79624 23.9996C9.79624 22.4067 10.08 20.8795 10.5599 19.4395L2.57436 13.2436Z" fill="#FBBC05"/>
+                  <path d="M23.9996 9.55636C27.5342 9.55636 30.676 10.7781 33.1851 13.1345L40.0577 6.2619C35.8904 2.37833 30.4797 0 23.9996 0C14.6179 0 6.52342 5.38908 2.57434 13.2437L10.5597 19.44C12.4578 13.7672 17.7596 9.55636 23.9996 9.55636Z" fill="#EA4335"/>
+                </svg>
+            </button>
+            <button class="social-btn facebook-btn">
+                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6">
+                    <title>Facebook</title>
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </button>
+        </div>
+
+          <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+
+        <div class="switch-form">
+          <p>Already have an account? <a href="#" id="show-login">Log In</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resident Container -->
+    <div class="container" id="resident-container" style="display: none">
+      <div class="header">
+        <h1>Barangay Services</h1>
+        <h2>Select A Service</h2>
+      </div>
+
+      <div class="nav-controls">
+        <button type="button" class="logout-btn">Logout</button>
+      </div>
+
+      <div class="service-options">
+        <div class="service-card" data-service="request">
+          <h3>Request Catalog</h3>
+          <p>Submit various barangay requests</p>
+        </div>
+
+        <div class="service-card" data-service="complaint">
+          <h3>Complaint Form</h3>
+          <p>File a complaint or report</p>
+        </div>
+
+        <div class="service-card" data-service="blotter">
+          <h3>Blotter Form</h3>
+          <p>File an incident report</p>
+        </div>
+      </div>
+
+      <div class="service-card" data-service="tracking">
+          <h3>My Submissions</h3>
+          <p>Track your requests and complaints</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tracking Container -->
+    <div class="container" id="tracking-container" style="display: none">
+      <div class="header">
+        <h1>My Submissions</h1>
+        <h2>Track your requests and complaints</h2>
+      </div>
+
+      <div class="nav-controls">
+        <button type="button" class="back-btn">Back</button>
+        <button type="button" class="logout-btn">Logout</button>
+      </div>
+
+      <div class="tracking-tabs">
+        <button type="button" class="tab-btn active" data-tab="requests">
+          My Requests
+        </button>
+        <button type="button" class="tab-btn" data-tab="complaints">
+          My Complaints
+        </button>
+        <button type="button" class="tab-btn" data-tab="blotters">
+          My Blotters
+        </button>
+      </div>
+
+      <div class="tracking-content">
+        <div class="tab-content active" id="requests-tab">
+          <div class="table-container">
+            <table class="tracking-table">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Type</th>
+                  <th>Date Submitted</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="requests-list"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-content" id="complaints-tab">
+          <div class="table-container">
+            <table class="tracking-table">
+              <thead>
+                <tr>
+                  <th>Complaint ID</th>
+                  <th>Type</th>
+                  <th>Date Submitted</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="complaints-list"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-content" id="blotters-tab">
+          <div class="table-container">
+            <table class="tracking-table">
+              <thead>
+                <tr>
+                  <th>Blotter ID</th>
+                  <th>Incident Type</th>
+                  <th>Date Submitted</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="blotters-list"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Request Form Container -->
+    <div class="container" id="request-form-container">
+      <header class="navbar">
+        <div class="menu-icon">&#9776;</div>
+        <nav class="nav-links">
+          <a href="#">Home</a>
+          <a href="#">Services</a>
+        </nav>
+        <div class="website-name">Barangay Management System</div>
+        <div class="notification-icon">&#128276;</div>
+        <div class="user-icon">&#128100;</div>
+      </header>
+
+      <div class="request-main-content">
+        <h2>Request Form</h2>
+
+        <div class="request-form-card">
+          <form id="request-form">
+            <div class="form-row three-cols">
+              <div class="form-group req">
+                <label for="surname">Surname</label>
+                <input type="text" id="surnameReq" name="surname" placeholder="">
+              </div>
+              <div class="form-group req">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstNameReq" name="firstName" placeholder="">
+              </div>
+              <div class="form-group req">
+                <label for="middletName">Middle Name</label>
+                <input type="text" id="middleNameReq" name="middleName" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-row two-cols">
+              <div class="form-group full-width-input req">
+                <label for="address">Address</label>
+                <input type="text" id="addressReq" name="address" placeholder="">
+              </div>
+              <div class="form-group req">
+                <label for="contactNumber">Contact Number</label>
+                <input type="text" id="contactNumberReq" name="contactNumber" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-row single-col">
+              <div class="form-group full-width-select req">
+                <label for="docType">Document / Certificate Type</label>
+                <select id="docType" name="docType">
+                <option value="">Choose the type of document / certificate you are requesting</option>
+                <option value="barangay_id">Barangay ID</option>
+                <option value="barangay_clearance">Barangay Clearance</option>
+                <option value="certificate_of_residency">Certificate of Residency</option>
+                </select>
+              </div>
+            </div>
+
+        <div class="form-submit-container">
+          <button type="submit">Submit</button>
+        </div>
+
+          </form>
+        </div>   
+      </div>
+    </div>
+
+    <!-- Complaint Form Container -->
+    <div class="container" id="complaint-form-container">
+      <header class="navbar">
+        <div class="nav-icon back-arrow">&#8592;</div>
+        <div class="website-name">Barangay Management System</div>
+        <div class="notification-icon">&#128276;</div>
+        <div class="nav-icon forward-arrow">&#8594;</div>
+      </header>
+
+      <div class="complaint-main-content">
+        <h2>Complaint Form</h2>
+
+        <div class="complaint-form-card">
+          <form id="complaint-form">
+            <div class="form-row three-cols">
+              <div class="form-group comp">
+                <label for="surname">Surname</label>
+                <input type="text" id="surnameComp" name="surname" placeholder="">
+              </div>
+              <div class="form-group comp">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstNameComp" name="firstName" placeholder="">
+              </div>
+              <div class="form-group comp">
+                <label for="middletName">Middle Name</label>
+                <input type="text" id="middleNameComp" name="middleName" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-row single-cols">
+              <div class="form-group full-width-input comp">
+                <label for="address">Address</label>
+                <input type="text" id="addressComp" name="address" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-row two-cols">
+              <div class="form-group comp">
+                <label for="contactNumber">Contact Number</label>
+                <input type="text" id="contactNumberComp" name="contactNumber" placeholder="">
+              </div>
+              <div class="form-group comp">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-row single-col">
+              <div class="form-group full-width-select comp">
+                <label for="typeOfComplaint">Type of Complaint</label>
+                <select id="typeOfComplaint" name="typeOfComplaint">
+                <option value="">Choose the type of complaint</option>
+                <option value="noise_complaint">Noise Complaint</option>
+                <option value="garbage_disposal">Improper Garbage Disposal</option>
+                <option value="safety_concern">Safety Concern</option>
+                </select>
+              </div>
+            </div>
+
+        <div class="form-submit-container">
+          <button type="submit">Submit</button>
+        </div>
+
+          </form>
+        </div>   
+      </div>
+    </div>
+
+    <!-- Blotter Form Container -->
+    <div class="container" id="blotter-form-container">
+      <header class="navbar">
+        <div class="nav-icon back-arrow">&#8592;</div>
+        <div class="website-name">Barangay Management System</div>
+        <div class="notification-icon">&#128276;</div>
+        <div class="nav-icon forward-arrow">&#8594;</div>
+      </header>
+
+      <div class="blotter-main-content">
+        <h2>Blotter Form</h2>
+
+        <div class="blotter-form-card">
+          <form id="blotter-form">
+            <div class="form-group blotter">
+              <label for="mainComplaint">Main Complaint</label>
+              <input type="text" id="mainComplaint" name="mainComplaint" placeholder="">
+                <div class="checkbox-container">
+                  <input type="checkbox" id="mainComplaintNonResident" name="mainComplaintNonResident">
+                  <label for="mainComplaintNonResident">non-resident</label>
+                </div>
+            </div>
+
+            <div class="form-row four-cols-add-checkbox">
+              <div class="form-group flex-grow">
+                <label for="otherComplaintName">Other Complaint</label>
+                <input type="text" id="otherComplaintName" name="otherComplaintName" placeholder="">
+               
+                <button type="button" class="add-button">Add</button>
+
+                <div class="checkbox-container">
+                  <input type="checkbox" id="otherComplainantNonResident" name="otherComplainantNonResident">
+                  <label for="otherComplainantNonResident">non-resident</label>
+                </div>
+              </div>
+
+              <div class="form-group flex-grow">
+                <label for="respondentName">Respondents</label>
+                <input type="text" id="respondentName" name="respondentName" placeholder="">
+              
+                <button type="button" class="add-button">Add</button>
+
+                <div class="checkbox-container">
+                  <input type="checkbox" id="respondentNonResident" name="respondentNonResident">
+                  <label for="respondentNonResident">non-resident</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row four-cols-add-checkbox">
+              <div class="form-group flex-grow">
+                <label for="attacker">Attackers</label>
+                <input type="text" id="attackerName" name="attackerName" placeholder="">
+              
+                <button type="button" class="add-button">Add</button>
+            
+                <div class="checkbox-container">
+                  <input type="checkbox" id="attackerNonResident" name="attackerNonResident">
+                  <label for="attackerNonResident">non-resident</label>
+                </div>
+              </div>
+
+              <div class="form-group flex-grow">
+                <label for="victim">Victims</label>
+                <input type="text" id="victimName" name="victimName" placeholder="">
+              
+                <button type="button" class="add-button">Add</button>
+            
+                <div class="checkbox-container">
+                  <input type="checkbox" id="victimNonResident" name="victimNonResident">
+                  <label for="victimNonResident">non-resident</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row two-cols">
+              <div class="form-group blotter">
+                <label for="incidentLoc">Incident Location</label>
+                <input type="text" id="incidentLoc" name="incidentLoc">
+              </div>
+              <div class="form-group blotter">
+                <label for="incidentType">Incident Type</label>
+                <select id="incidentType" name="incidentType">
+                <option value="">Select incident type</option>
+                <option value="noise_complaint">Theft</option>
+                <option value="garbage_disposal">Assault</option>
+                <option value="safety_concern">Property Damage</option>
+                <option value="safety_concern">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row two-cols">
+              <div class="form-group blotter">
+                <label for="dateOfIncident">Date of Incident</label>
+                <input type="text" id="dateOfIncident" name="dateOfIncident">
+              </div>
+              <div class="form-group blotter">
+                <label for="timeOfIncident">Time of Incident</label>
+                <input type="text" id="timeOfIncident" name="timeOfIncident">
+              </div>
+            </div>
+
+            <div class="form-row two-cols">
+              <div class="form-group blotter">
+                <label for="dateReported">Date Reported</label>
+                <input type="text" id="dateReported" name="dateReported">
+              </div>
+              <div class="form-group blotter">
+                <label for="timeReported">Time Reported</label>
+                <input type="text" id="timeReported" name="timeReported">
+              </div>
+            </div>
+
+        <div class="form-submit-container">
+          <button type="submit">Submit</button>
+        </div>
+
+          </form>
+        </div>   
+      </div>
+    </div>
+
+    <!-- Staff Container -->
+    <div class="container" id="staff-container" style="display: none">
+      <div class="header">
+        <h1>Barangay Staff Portal</h1>
+        <p>Please enter your staff password to continue</p>
+      </div>
+
+      <div class="nav-controls">
+        <button type="button" class="logout-btn">Logout</button>
+      </div>
+
+      <div class="form-container">
+        <form id="staff-auth-form">
+          <div class="form-group">
+            <label for="staff-password">Staff Password</label>
+            <input type="password" id="staff-password" required />
+          </div>
+
+          <button type="submit" class="btn">Authenticate</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Admin Container -->
+    <div class="container" id="admin-container" style="display: none">
+      <div class="header">
+        <h1>Admin Portal</h1>
+        <p>Please enter your admin password to continue</p>
+      </div>
+
+      <div class="nav-controls">
+        <button type="button" class="logout-btn">Logout</button>
+      </div>
+
+      <div class="form-container">
+        <form id="admin-auth-form">
+          <div class="form-group">
+            <label for="admin-password">Admin Password</label>
+            <input type="password" id="admin-password" required />
+          </div>
+
+          <button type="submit" class="btn">Authenticate</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Staff Dashboard -->
+    <div class="container" id="staff-dashboard" style="display: none">
+      <div class="header">
+        <h1>Barangay Staff Dashboard</h1>
+      </div>
+
+      <div class="nav-controls">
+        <button type="button" class="logout-btn">Logout</button>
+      </div>
+
+      <div class="dashboard">
+        <div class="stats">
+          <div class="stat-card">
+            <h3>Pending Requests</h3>
+            <p class="stat-value" id="pending-count">0</p>
+          </div>
+
+          <div class="stat-card">
+            <h3>Processing</h3>
+            <p class="stat-value" id="processing-count">0</p>
+          </div>
+
+          <div class="stat-card">
+            <h3>Completed</h3>
+            <p class="stat-value" id="completed-count">0</p>
+          </div>
+        </div>
+
+        <div class="staff-actions">
+          <h2>Manage Submissions</h2>
+          <div class="submission-tabs">
+            <button type="button" class="tab-btn active" data-tab="requests">Requests</button>
+            <button type="button" class="tab-btn" data-tab="complaints">Complaints</button>
+            <button type="button" class="tab-btn" data-tab="blotters">Blotters</button>
+          </div>
+
+          <div class="submission-content">
+            <div class="tab-content active" id="requests-tab-staff">
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="staff-requests-list"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-content" id="complaints-tab-staff">
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="staff-complaints-list"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-content" id="blotters-tab-staff">
+              <div class="table-container">
+                <table class="submission-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Resident</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="staff-blotters-list"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="container" id="admin-dashboard" style="display: none">
+      <div class="header">
+        <h1>Admin Dashboard</h1>
+      </div>
+
+      <div class="nav-controls">
+        <button type="button" class="logout-btn">Logout</button>
+      </div>
+
+      <div class="dashboard">
+        <div class="stats">
+          <div class="stat-card">
+            <h3>Total Users</h3>
+            <p class="stat-value" id="total-users">0</p>
+          </div>
+
+          <div class="stat-card">
+            <h3>Active Staff</h3>
+            <p class="stat-value" id="active-staff">0</p>
+          </div>
+
+          <div class="stat-card">
+            <h3>Pending Issues</h3>
+            <p class="stat-value" id="pending-issues">0</p>
+          </div>
+        </div>
+
+        <div class="admin-actions">
+          <h2>Send Updates to Residents</h2>
+          <form id="email-form">
+            <div class="form-group">
+              <label for="resident-email">Resident Email</label>
+              <select id="resident-email" required>
+                <option value="">Select Resident</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="concern-type">Concern Type</label>
+              <select id="concern-type" required>
+                <option value="" selected disabled>Select Concern Type</option>
+                <option value="request">Request Update</option>
+                <option value="complaint">Complaint Update</option>
+                <option value="blotter">Blotter Update</option>
+                <option value="general">General Announcement</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="email-subject">Subject</label>
+              <input type="text" id="email-subject" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email-message">Message</label>
+              <textarea id="email-message" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Send Email</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="copy.js"></script>
+  </body>
+</html>
