@@ -131,17 +131,17 @@
 
       <div class="nav-controls">
         <button type="button" class="logout-btn">Logout</button>
+        <!-- Notification Icon and Panel -->
+        <div class="notification-area">
+          <button id="notif-icon">🔔 <span id="notif-count">0</span></button>
+          <div id="notif-panel" class="notif-panel" style="display: none;">
+            <h4>Notifications</h4>
+            <ul id="notif-list"></ul>
+          </div>
+        </div>
+        <!-- My Submissions link -->
+        <button type="button" class="nav-btn" id="tracking-btn">My Submissions</button>
       </div>
-	  
-	  <!-- Notification Icon and Panel -->
-	<div class="notification-area">
-	  <button id="notif-icon">🔔 <span id="notif-count">0</span></button>
-	  <div id="notif-panel" class="notif-panel" style="display: none;">
-		<h4>Notifications</h4>
-		<ul id="notif-list"></ul>
-	  </div>
-	</div>
-
 
       <div class="service-options">
         <div class="service-card" data-service="request">
@@ -157,11 +157,6 @@
         <div class="service-card" data-service="blotter">
           <h3>Blotter Form</h3>
           <p>File an incident report</p>
-        </div>
-
-        <div class="service-card" data-service="tracking">
-          <h3>My Submissions</h3>
-          <p>Track your requests and complaints</p>
         </div>
       </div>
     </div>
@@ -682,6 +677,7 @@
                       <th>Type</th>
                       <th>Date</th>
                       <th>Status</th>
+                      <th>Updated By</th>
                     </tr>
                   </thead>
                   <tbody id="admin-requests-list"></tbody>
@@ -699,6 +695,7 @@
                       <th>Type</th>
                       <th>Date</th>
                       <th>Status</th>
+                      <th>Updated By</th>
                     </tr>
                   </thead>
                   <tbody id="admin-complaints-list"></tbody>
@@ -716,6 +713,7 @@
                       <th>Type</th>
                       <th>Date</th>
                       <th>Status</th>
+                      <th>Updated By</th>
                     </tr>
                   </thead>
                   <tbody id="admin-blotters-list"></tbody>
