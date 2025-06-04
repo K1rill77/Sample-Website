@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const complaintFormContainer = document.getElementById("complaint-form-container");
   const blotterFormContainer = document.getElementById("blotter-form-container");
   const trackingContainer = document.getElementById("tracking-container");
+  const trackingBtn = document.getElementById("tracking-btn");
 
   // Data storage
   let selectedRole = null;
@@ -144,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
     switch (user.userType) {
       case "resident":
         residentContainer.style.display = "block";
-		showResidentNotifications(user.email);
+        showResidentNotifications(user.email);
         break;
       case "staff":
         staffContainer.style.display = "block";
@@ -217,12 +218,15 @@ document.addEventListener("DOMContentLoaded", function () {
         case "blotter":
           blotterFormContainer.style.display = "block";
           break;
-        case "tracking":
-          trackingContainer.style.display = "block";
-          loadResidentTracking();
-          break;
       }
     });
+  });
+
+  // My Submissions button handler
+  trackingBtn?.addEventListener("click", function() {
+    hideAllContainers();
+    trackingContainer.style.display = "block";
+    loadResidentTracking();
   });
 
   // Form submission handlers
@@ -719,122 +723,79 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   
   // Store new notification
-function addResidentNotification(email, subject, message) {
-  const current = JSON.parse(localStorage.getItem("residentNotifications") || "[]");
-  const newNotif = {
-    email,
-    subject,
-    message,
-    time: new Date().toLocaleString()
-  };
-  current.push(newNotif);
-  localStorage.setItem("residentNotifications", JSON.stringify(current));
+  function addResidentNotification(email, subject, message) {
+    const current = JSON.parse(localStorage.getItem("residentNotifications") || "[]");
+    const newNotif = {
+      email,
+      subject,
+      message,
+      time: new Date().toLocaleString()
+    };
+    current.push(newNotif);
+    localStorage.setItem("residentNotifications", JSON.stringify(current));
 
-  // If resident is currently logged in and matches, show popup
-  const active = localStorage.getItem("loggedInResident");
-  if (active && active === email) {
-    alert(`📬 New Notification:\n${subject}\n${message}`);
-    showResidentNotifications(email); // Refresh panel
+    // If resident is currently logged in and matches, show popup
+    const active = localStorage.getItem("loggedInResident");
+    if (active && active === email) {
+      alert(`📬 New Notification:\n${subject}\n${message}`);
+      showResidentNotifications(email); // Refresh panel
+    }
   }
-}
 
-// Display notifications for a resident
-function showResidentNotifications(currentEmail) {
-  const notifList = document.getElementById("notif-list");
-  const notifCount = document.getElementById("notif-count");
-  const all = JSON.parse(localStorage.getItem("residentNotifications") || "[]");
-  const userNotifs = all.filter(n => n.email === currentEmail);
+  // Display notifications for a resident
+  function showResidentNotifications(currentEmail) {
+    const notifList = document.getElementById("notif-list");
+    const notifCount = document.getElementById("notif-count");
+    const all = JSON.parse(localStorage.getItem("residentNotifications") || "[]");
+    const userNotifs = all.filter(n => n.email === currentEmail);
 
-  notifList.innerHTML = "";
-  if (userNotifs.length > 0) {
-    notifCount.textContent = userNotifs.length;
-    userNotifs.reverse().forEach(n => {
-      const li = document.createElement("li");
-      li.textContent = `${n.subject}: ${n.message} (${n.time})`;
-      notifList.appendChild(li);
+    notifList.innerHTML = "";
+    if (userNotifs.length > 0) {
+      notifCount.textContent = userNotifs.length;
+      userNotifs.reverse().forEach(n => {
+        const li = document.createElement("li");
+        li.textContent = `${n.subject}: ${n.message} (${n.time})`;
+        notifList.appendChild(li);
+      });
+    } else {
+      notifList.innerHTML = "<li>No notifications.</li>";
+      notifCount.textContent = "0";
+    }
+  }
+
+  // Setup event listeners for notifications
+  const notifIcon = document.getElementById("notif-icon");
+  const notifPanel = document.getElementById("notif-panel");
+
+  // Toggle notification dropdown
+  if (notifIcon) {
+    notifIcon.addEventListener("click", () => {
+      notifPanel.style.display = notifPanel.style.display === "none" ? "block" : "none";
     });
-  } else {
-    notifList.innerHTML = "<li>No notifications.</li>";
-    notifCount.textContent = "0";
   }
-}
 
-// Setup event listeners
-// 📬 Notification logic inside the main DOMContentLoaded
-const notifIcon = document.getElementById("notif-icon");
-const notifPanel = document.getElementById("notif-panel");
+  // Admin email form listener
+  const waitForAdminForm = setInterval(() => {
+    const emailForm = document.getElementById("email-form");
+    if (emailForm && !emailForm.dataset.listenerAdded) {
+      emailForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-// Toggle notification dropdown
-if (notifIcon) {
-  notifIcon.addEventListener("click", () => {
-    notifPanel.style.display = notifPanel.style.display === "none" ? "block" : "none";
-  });
-}
+        const email = document.getElementById("resident-email").value.trim();
+        const subject = document.getElementById("email-subject").value.trim();
+        const message = document.getElementById("email-message").value.trim();
 
-// Store new notification
-function addResidentNotification(email, subject, message) {
-  const current = JSON.parse(localStorage.getItem("residentNotifications") || "[]");
-  const newNotif = {
-    email,
-    subject,
-    message,
-    time: new Date().toLocaleString()
-  };
-  current.push(newNotif);
-  localStorage.setItem("residentNotifications", JSON.stringify(current));
+        if (email && subject && message) {
+          addResidentNotification(email, subject, message);
+          alert(`📧 Simulated Email Sent to: ${email}`);
+          emailForm.reset();
+        } else {
+          alert("⚠️ Please fill all fields.");
+        }
+      });
 
-  // Show popup if recipient is logged in
-  if (currentUser && currentUser.email === email) {
-    alert(`📬 New Notification:\n${subject}\n${message}`);
-    showResidentNotifications(email);
-  }
-}
-
-// Show resident notifications
-function showResidentNotifications(currentEmail) {
-  const notifList = document.getElementById("notif-list");
-  const notifCount = document.getElementById("notif-count");
-  const all = JSON.parse(localStorage.getItem("residentNotifications") || "[]");
-  const userNotifs = all.filter(n => n.email === currentEmail);
-
-  notifList.innerHTML = "";
-  if (userNotifs.length > 0) {
-    notifCount.textContent = userNotifs.length;
-    userNotifs.reverse().forEach(n => {
-      const li = document.createElement("li");
-      li.textContent = `${n.subject}: ${n.message} (${n.time})`;
-      notifList.appendChild(li);
-    });
-  } else {
-    notifList.innerHTML = "<li>No notifications.</li>";
-    notifCount.textContent = "0";
-  }
-}
-
-// Admin email form listener
-const waitForAdminForm = setInterval(() => {
-  const emailForm = document.getElementById("email-form");
-  if (emailForm && !emailForm.dataset.listenerAdded) {
-    emailForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const email = document.getElementById("resident-email").value.trim();
-      const subject = document.getElementById("email-subject").value.trim();
-      const message = document.getElementById("email-message").value.trim();
-
-      if (email && subject && message) {
-        addResidentNotification(email, subject, message);
-        alert(`📧 Simulated Email Sent to: ${email}`);
-        emailForm.reset();
-      } else {
-        alert("⚠️ Please fill all fields.");
-      }
-    });
-
-    emailForm.dataset.listenerAdded = "true";
-    clearInterval(waitForAdminForm);
-  }
-}, 500);
-
-
+      emailForm.dataset.listenerAdded = "true";
+      clearInterval(waitForAdminForm);
+    }
+  }, 500);
 });
