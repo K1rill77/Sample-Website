@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const requestFormContainer = document.getElementById("request-form-container");
   const complaintFormContainer = document.getElementById("complaint-form-container");
   const blotterFormContainer = document.getElementById("blotter-form-container");
+  const trackingContainer = document.getElementById("tracking-container");
+  const trackingBtn = document.querySelector('[data-service="tracking"]');
+  const mobileMenuBtn = document.getElementById("mobile-menu");
+  const mainNav = document.getElementById("main-nav");
 
   // Data storage
   let selectedRole = null;
@@ -33,6 +37,22 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize - show role selection first
   hideAllContainers();
   roleSelectionContainer.style.display = "flex";
+
+  // Mobile menu toggle
+  if (mobileMenuBtn && mainNav) {
+    mobileMenuBtn.addEventListener("click", function() {
+      mainNav.style.display = mainNav.style.display === "flex" ? "none" : "flex";
+    });
+    
+    // Adjust for window resize
+    window.addEventListener("resize", function() {
+      if (window.innerWidth > 768) {
+        mainNav.style.display = "flex";
+      } else {
+        mainNav.style.display = "none";
+      }
+    });
+  }
 
   // Role selection handler
   document.querySelectorAll(".role-card").forEach((card) => {
@@ -66,158 +86,139 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Signup form submission
-  document
-    .getElementById("signup-form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
+  document.getElementById("signup-form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const email = document.getElementById("signup-email").value.trim();
-      const firstName = document.getElementById("first-name").value.trim();
-      const lastName = document.getElementById("last-name").value.trim();
-      const userType = document.getElementById("user-type").value;
-      const password = document.getElementById("signup-password").value;
-      const confirmPassword = document.getElementById("confirm-password").value;
+    const email = document.getElementById("signup-email").value.trim();
+    const firstName = document.getElementById("first-name").value.trim();
+    const lastName = document.getElementById("last-name").value.trim();
+    const userType = document.getElementById("user-type").value;
+    const password = document.getElementById("signup-password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
 
-      // Validation
-      if (
-        !email ||
-        !firstName ||
-        !lastName ||
-        !userType ||
-        !password ||
-        !confirmPassword
-      ) {
-        alert("Please fill in all fields");
-        return;
-      }
+    // Validation
+    if (!email || !firstName || !lastName || !userType || !password || !confirmPassword) {
+      alert("Please fill in all fields");
+      return;
+    }
 
-      if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-      }
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
 
-      if (users.some((user) => user.email === email)) {
-        alert("User with this email already exists!");
-        return;
-      }
+    if (users.some((user) => user.email === email)) {
+      alert("User with this email already exists!");
+      return;
+    }
 
-      // Create new user
-      const newUser = {
-        email,
-        firstName,
-        lastName,
-        userType,
-        password,
-        dateCreated: new Date().toISOString(),
-      };
+    // Create new user
+    const newUser = {
+      email,
+      firstName,
+      lastName,
+      userType,
+      password,
+      dateCreated: new Date().toISOString(),
+    };
 
-      users.push(newUser);
-      localStorage.setItem("users", JSON.stringify(users));
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
 
-      // Show role-specific instructions
-      if (userType === "staff") {
-        alert(
-          'Account created successfully! As staff, you will need to verify with "brgystff" after login.'
-        );
-      } else if (userType === "admin") {
-        alert(
-          'Account created successfully! As admin, you will need to verify with "admin" after login.'
-        );
-      } else {
-        alert("Account created successfully!");
-      }
+    // Show role-specific instructions
+    if (userType === "staff") {
+      alert('Account created successfully! As staff, you will need to verify with "brgystff" after login.');
+    } else if (userType === "admin") {
+      alert('Account created successfully! As admin, you will need to verify with "admin" after login.');
+    } else {
+      alert("Account created successfully!");
+    }
 
-      // Clear form and show login
-      this.reset();
-      signupContainer.style.display = "none";
-      loginContainer.style.display = "block";
-    });
+    // Clear form and show login
+    this.reset();
+    signupContainer.style.display = "none";
+    loginContainer.style.display = "flex";
+  });
 
   // Login form submission
-  document
-    .getElementById("login-form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
+  document.getElementById("login-form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-      // Find user
-      const user = users.find((u) => u.email === email);
+    // Find user
+    const user = users.find((u) => u.email === email);
 
-      // Validate credentials - only check against stored password
-      if (!user || user.password !== password) {
-        alert("Invalid email or password!");
-        return;
-      }
+    // Validate credentials - only check against stored password
+    if (!user || user.password !== password) {
+      alert("Invalid email or password!");
+      return;
+    }
 
-      currentUser = user;
-      hideAllContainers();
+    currentUser = user;
+    hideAllContainers();
 
-      // Redirect based on role
-      switch (user.userType) {
-        case "resident":
-          residentContainer.style.display = "block";
-          loadResidentTracking();
-          break;
-        case "staff":
-          staffContainer.style.display = "block";
-          break;
-        case "admin":
-          adminContainer.style.display = "block";
-          break;
-        default:
-          roleSelectionContainer.style.display = "block";
-      }
-    });
+    // Redirect based on role
+    switch (user.userType) {
+      case "resident":
+        residentContainer.style.display = "block";
+        showResidentNotifications(user.email);
+        break;
+      case "staff":
+        staffContainer.style.display = "block";
+        break;
+      case "admin":
+        adminContainer.style.display = "block";
+        break;
+      default:
+        roleSelectionContainer.style.display = "block";
+    }
+  });
 
   // Staff verification
-  document
-    .getElementById("staff-auth-form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const password = document.getElementById("staff-password").value;
+  document.getElementById("staff-auth-form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const password = document.getElementById("staff-password").value;
 
-      // Verify current user is actually staff
-      if (!currentUser || currentUser.userType !== "staff") {
-        alert("Invalid user session!");
-        hideAllContainers();
-        roleSelectionContainer.style.display = "block";
-        return;
-      }
+    // Verify current user is actually staff
+    if (!currentUser || currentUser.userType !== "staff") {
+      alert("Invalid user session!");
+      hideAllContainers();
+      roleSelectionContainer.style.display = "block";
+      return;
+    }
 
-      if (password === "brgystff") {
-        hideAllContainers();
-        staffDashboard.style.display = "block";
-        loadStaffDashboard();
-      } else {
-        alert("Invalid staff verification password!");
-      }
-    });
+    if (password === "brgystff") {
+      hideAllContainers();
+      staffDashboard.style.display = "block";
+      loadStaffDashboard();
+    } else {
+      alert("Invalid staff verification password!");
+    }
+  });
 
   // Admin verification
-  document
-    .getElementById("admin-auth-form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const password = document.getElementById("admin-password").value;
+  document.getElementById("admin-auth-form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const password = document.getElementById("admin-password").value;
 
-      // Verify current user is actually admin
-      if (!currentUser || currentUser.userType !== "admin") {
-        alert("Invalid user session!");
-        hideAllContainers();
-        roleSelectionContainer.style.display = "block";
-        return;
-      }
+    // Verify current user is actually admin
+    if (!currentUser || currentUser.userType !== "admin") {
+      alert("Invalid user session!");
+      hideAllContainers();
+      roleSelectionContainer.style.display = "block";
+      return;
+    }
 
-      if (password === "admin") {
-        hideAllContainers();
-        adminDashboard.style.display = "block";
-        loadAdminDashboard();
-      } else {
-        alert("Invalid admin verification password!");
-      }
-    });
+    if (password === "admin") {
+      hideAllContainers();
+      adminDashboard.style.display = "block";
+      loadAdminDashboard();
+    } else {
+      alert("Invalid admin verification password!");
+    }
+  });
 
   // Service card click handlers
   document.querySelectorAll(".service-card").forEach((card) => {
@@ -235,45 +236,48 @@ document.addEventListener("DOMContentLoaded", function () {
         case "blotter":
           blotterFormContainer.style.display = "block";
           break;
+        case "tracking":
+          trackingContainer.style.display = "block";
+          loadResidentTracking();
+          break;
       }
     });
   });
 
+  // My Submissions button handler
+  trackingBtn?.addEventListener("click", function() {
+    hideAllContainers();
+    trackingContainer.style.display = "block";
+    loadResidentTracking();
+  });
+
   // Form submission handlers
-  document
-    .getElementById("request-form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      submitRequest();
-    });
+  document.getElementById("request-form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    submitRequest();
+  });
 
-  document
-    .getElementById("complaint-form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      submitComplaint();
-    });
+  document.getElementById("complaint-form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    submitComplaint();
+  });
 
-  document
-    .getElementById("blotter-form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      submitBlotter();
-    });
+  document.getElementById("blotter-form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    submitBlotter();
+  });
 
   // Tab switching for resident tracking
-  document.querySelectorAll(".tab-btn").forEach((btn) => {
+  document.querySelectorAll(".tracking-tabs .tab-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
       const tabId = this.getAttribute("data-tab");
 
       // Update active tab button
-      document
-        .querySelectorAll(".tab-btn")
-        .forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".tracking-tabs .tab-btn").forEach((b) => b.classList.remove("active"));
       this.classList.add("active");
 
       // Update active tab content
-      document.querySelectorAll(".tab-content").forEach((content) => {
+      document.querySelectorAll(".tracking-content .tab-content").forEach((content) => {
         content.classList.remove("active");
       });
       document.getElementById(`${tabId}-tab`).classList.add("active");
@@ -286,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function () {
       currentUser = null;
       selectedRole = null;
       hideAllContainers();
-      roleSelectionContainer.style.display = "block";
+      roleSelectionContainer.style.display = "flex";
     });
   });
 
@@ -299,7 +303,6 @@ document.addEventListener("DOMContentLoaded", function () {
         switch (currentUser.userType) {
           case "resident":
             residentContainer.style.display = "block";
-            loadResidentTracking();
             break;
           case "staff":
             staffContainer.style.display = "block";
@@ -321,15 +324,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!currentUser) return;
 
     // Filter for current user's submissions
-    const userRequests = requests.filter(
-      (req) => req.email === currentUser.email
-    );
-    const userComplaints = complaints.filter(
-      (comp) => comp.email === currentUser.email
-    );
-    const userBlotters = blotters.filter(
-      (blot) => blot.email === currentUser.email
-    );
+    const userRequests = requests.filter((req) => req.email === currentUser.email);
+    const userComplaints = complaints.filter((comp) => comp.email === currentUser.email);
+    const userBlotters = blotters.filter((blot) => blot.email === currentUser.email);
 
     // Populate requests table
     const requestsList = document.getElementById("requests-list");
@@ -368,7 +365,7 @@ document.addEventListener("DOMContentLoaded", function () {
         (blot) => `
       <tr>
         <td>${blot.id}</td>
-        <td>${blot.type}</td>
+        <td>${blot.incidentType}</td>
         <td>${new Date(blot.date).toLocaleDateString()}</td>
         <td class="status-${blot.status}">${blot.status}</td>
       </tr>
@@ -381,11 +378,12 @@ document.addEventListener("DOMContentLoaded", function () {
   function submitRequest() {
     const requestData = {
       id: "REQ-" + Date.now(),
+      email: currentUser.email,
+      type: document.getElementById("docType").value,
       firstName: document.getElementById("firstNameReq").value,
       lastName: document.getElementById("lastNameReq").value,
       address: document.getElementById("addressReq").value,
       contactNumber: document.getElementById("contactNumberReq").value,
-      type: document.getElementById("docType").value,
       date: new Date().toISOString(),
       status: "pending",
     };
@@ -396,7 +394,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     hideAllContainers();
     residentContainer.style.display = "block";
-    loadResidentTracking();
   }
 
   // Submit complaint function
@@ -404,11 +401,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const complaintData = {
       id: "COMP-" + Date.now(),
       email: currentUser.email,
+      type: document.getElementById("typeOfComplaint").value,
       firstName: document.getElementById("firstNameComp").value,
       lastName: document.getElementById("middleNameComp").value,
       address: document.getElementById("addressComp").value,
       contactNumber: document.getElementById("contactNumberComp").value,
-      type: document.getElementById("typeOfComplaint").value,
       date: new Date().toISOString(),
       status: "pending",
     };
@@ -419,7 +416,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     hideAllContainers();
     residentContainer.style.display = "block";
-    loadResidentTracking();
   }
 
   // Submit blotter function
@@ -427,12 +423,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const blotterData = {
       id: "BLOT-" + Date.now(),
       email: currentUser.email,
-      mainComplaint: document.getElementById("main-complaint").value,
-      otherComplaint: document.getElementById("other-complaint").value,
-      incidentLocation: document.getElementById("incident-location").value,
-      incidentType: document.getElementById("incident-type").value,
-      incidentDate: document.getElementById("incident-date").value,
-      incidentTime: document.getElementById("incident-time").value,
+      mainComplaint: document.getElementById("mainComplaint").value,
+      otherComplaint: document.getElementById("otherComplaintName").value,
+      incidentLocation: document.getElementById("incidentLoc").value,
+      incidentType: document.getElementById("incidentType").value,
+      incidentDate: document.getElementById("dateOfIncident").value,
+      incidentTime: document.getElementById("timeOfIncident").value,
+      reportDate: document.getElementById("dateReported").value,
+      reportTime: document.getElementById("timeReported").value,
       date: new Date().toISOString(),
       status: "pending",
     };
@@ -443,10 +441,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     hideAllContainers();
     residentContainer.style.display = "block";
-    loadResidentTracking();
   }
 
-  // Updated Load staff dashboard function
+  // Load staff dashboard function
   function loadStaffDashboard() {
     // Get all submissions
     requests = JSON.parse(localStorage.getItem("requests")) || [];
@@ -484,21 +481,13 @@ document.addEventListener("DOMContentLoaded", function () {
         <td class="status-${req.status}">${req.status}</td>
         <td>
           <select class="status-select" data-type="request" data-id="${req.id}">
-            <option value="pending" ${
-              req.status === "pending" ? "selected" : ""
-            }>Pending</option>
-            <option value="processing" ${
-              req.status === "processing" ? "selected" : ""
-            }>Processing</option>
-            <option value="completed" ${
-              req.status === "completed" ? "selected" : ""
-            }>Completed</option>
+            <option value="pending" ${req.status === "pending" ? "selected" : ""}>Pending</option>
+            <option value="processing" ${req.status === "processing" ? "selected" : ""}>Processing</option>
+            <option value="completed" ${req.status === "completed" ? "selected" : ""}>Completed</option>
           </select>
         </td>
         <td>
-          <button class="update-btn" data-type="request" data-id="${
-            req.id
-          }">Update</button>
+          <button class="update-btn" data-type="request" data-id="${req.id}">Update</button>
         </td>
       </tr>
     `;
@@ -518,24 +507,14 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${new Date(comp.date).toLocaleDateString()}</td>
         <td class="status-${comp.status}">${comp.status}</td>
         <td>
-          <select class="status-select" data-type="complaint" data-id="${
-            comp.id
-          }">
-            <option value="pending" ${
-              comp.status === "pending" ? "selected" : ""
-            }>Pending</option>
-            <option value="processing" ${
-              comp.status === "processing" ? "selected" : ""
-            }>Processing</option>
-            <option value="completed" ${
-              comp.status === "completed" ? "selected" : ""
-            }>Completed</option>
+          <select class="status-select" data-type="complaint" data-id="${comp.id}">
+            <option value="pending" ${comp.status === "pending" ? "selected" : ""}>Pending</option>
+            <option value="processing" ${comp.status === "processing" ? "selected" : ""}>Processing</option>
+            <option value="completed" ${comp.status === "completed" ? "selected" : ""}>Completed</option>
           </select>
         </td>
         <td>
-          <button class="update-btn" data-type="complaint" data-id="${
-            comp.id
-          }">Update</button>
+          <button class="update-btn" data-type="complaint" data-id="${comp.id}">Update</button>
         </td>
       </tr>
     `;
@@ -555,24 +534,14 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${new Date(blot.date).toLocaleDateString()}</td>
         <td class="status-${blot.status}">${blot.status}</td>
         <td>
-          <select class="status-select" data-type="blotter" data-id="${
-            blot.id
-          }">
-            <option value="pending" ${
-              blot.status === "pending" ? "selected" : ""
-            }>Pending</option>
-            <option value="processing" ${
-              blot.status === "processing" ? "selected" : ""
-            }>Processing</option>
-            <option value="completed" ${
-              blot.status === "completed" ? "selected" : ""
-            }>Completed</option>
+          <select class="status-select" data-type="blotter" data-id="${blot.id}">
+            <option value="pending" ${blot.status === "pending" ? "selected" : ""}>Pending</option>
+            <option value="processing" ${blot.status === "processing" ? "selected" : ""}>Processing</option>
+            <option value="completed" ${blot.status === "completed" ? "selected" : ""}>Completed</option>
           </select>
         </td>
         <td>
-          <button class="update-btn" data-type="blotter" data-id="${
-            blot.id
-          }">Update</button>
+          <button class="update-btn" data-type="blotter" data-id="${blot.id}">Update</button>
         </td>
       </tr>
     `;
@@ -585,30 +554,24 @@ document.addEventListener("DOMContentLoaded", function () {
         const tabId = this.getAttribute("data-tab");
 
         // Update active tab button
-        document
-          .querySelectorAll(".submission-tabs .tab-btn")
-          .forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll(".submission-tabs .tab-btn").forEach((b) => b.classList.remove("active"));
         this.classList.add("active");
 
         // Update active tab content
-        document
-          .querySelectorAll(".submission-content .tab-content")
-          .forEach((content) => {
-            content.classList.remove("active");
-          });
+        document.querySelectorAll(".submission-content .tab-content").forEach((content) => {
+          content.classList.remove("active");
+        });
         document.getElementById(`${tabId}-tab-staff`).classList.add("active");
       });
     });
   }
 
-  // Updated Status update handler
+  // Status update handler
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("update-btn")) {
       const type = e.target.getAttribute("data-type");
       const id = e.target.getAttribute("data-id");
-      const select = document.querySelector(
-        `.status-select[data-type="${type}"][data-id="${id}"]`
-      );
+      const select = document.querySelector(`.status-select[data-type="${type}"][data-id="${id}"]`);
       const newStatus = select.value;
 
       // Update in localStorage
@@ -624,6 +587,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const itemIndex = items.findIndex((item) => item.id === id);
       if (itemIndex !== -1) {
         items[itemIndex].status = newStatus;
+        // Add who updated this
+        items[itemIndex].updatedBy = currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : "Staff";
 
         // Save back to localStorage
         if (type === "request") {
@@ -643,6 +608,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Load admin dashboard
   function loadAdminDashboard() {
     const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+    requests = JSON.parse(localStorage.getItem("requests")) || [];
+    complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    blotters = JSON.parse(localStorage.getItem("blotters")) || [];
 
     // Update counts
     document.getElementById("total-users").textContent = allUsers.length;
@@ -665,44 +633,185 @@ document.addEventListener("DOMContentLoaded", function () {
             `<option value="${user.email}">${user.firstName} ${user.lastName} (${user.email})</option>`
         )
         .join("");
+
+    // Load status board
+    loadAdminStatusBoard();
+
+    // Admin navigation button handlers
+    document.querySelectorAll(".admin-nav-btn").forEach((btn) => {
+      btn.addEventListener("click", function() {
+        const page = this.getAttribute("data-page");
+        
+        // Update active button
+        document.querySelectorAll(".admin-nav-btn").forEach(b => b.classList.remove("active"));
+        this.classList.add("active");
+        
+        // Show the correct page
+        if (page === "dashboard") {
+          document.querySelector(".admin-actions").style.display = "block";
+          document.getElementById("admin-status-board").style.display = "none";
+        } else {
+          document.querySelector(".admin-actions").style.display = "none";
+          document.getElementById("admin-status-board").style.display = "block";
+          loadAdminStatusBoard();
+        }
+      });
+    });
+
+    // Tab switching for admin status board
+    document.querySelectorAll("#admin-status-board .tab-btn").forEach((btn) => {
+      btn.addEventListener("click", function() {
+        const tabId = this.getAttribute("data-tab");
+
+        // Update active tab button
+        document.querySelectorAll("#admin-status-board .tab-btn").forEach((b) => b.classList.remove("active"));
+        this.classList.add("active");
+
+        // Update active tab content
+        document.querySelectorAll("#admin-status-board .tab-content").forEach((content) => {
+          content.classList.remove("active");
+        });
+        document.getElementById(`${tabId}-tab-admin`).classList.add("active");
+      });
+    });
   }
 
-  // Status update handler
-  document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("update-btn")) {
-      const type = e.target.getAttribute("data-type");
-      const id = e.target.getAttribute("data-id");
-      const select = document.querySelector(
-        `.status-select[data-type="${type}"][data-id="${id}"]`
-      );
-      const newStatus = select.value;
+  // Load admin status board function
+  function loadAdminStatusBoard() {
+    const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+    requests = JSON.parse(localStorage.getItem("requests")) || [];
+    complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    blotters = JSON.parse(localStorage.getItem("blotters")) || [];
 
-      // Update in localStorage
-      let items;
-      if (type === "request") {
-        items = requests;
-      } else if (type === "complaint") {
-        items = complaints;
-      } else if (type === "blotter") {
-        items = blotters;
-      }
+    // Populate requests table
+    const requestsList = document.getElementById("admin-requests-list");
+    requestsList.innerHTML = requests
+      .map((req) => {
+        const user = allUsers.find((u) => u.email === req.email) || {};
+        return `
+          <tr>
+            <td>${req.id}</td>
+            <td>${user.firstName || ""} ${user.lastName || ""}</td>
+            <td>${req.type}</td>
+            <td>${new Date(req.date).toLocaleDateString()}</td>
+            <td class="status-${req.status}">${req.status}</td>
+            <td>${req.updatedBy || "N/A"}</td>
+          </tr>
+        `;
+      })
+      .join("");
 
-      const itemIndex = items.findIndex((item) => item.id === id);
-      if (itemIndex !== -1) {
-        items[itemIndex].status = newStatus;
+    // Populate complaints table
+    const complaintsList = document.getElementById("admin-complaints-list");
+    complaintsList.innerHTML = complaints
+      .map((comp) => {
+        const user = allUsers.find((u) => u.email === comp.email) || {};
+        return `
+          <tr>
+            <td>${comp.id}</td>
+            <td>${user.firstName || ""} ${user.lastName || ""}</td>
+            <td>${comp.type}</td>
+            <td>${new Date(comp.date).toLocaleDateString()}</td>
+            <td class="status-${comp.status}">${comp.status}</td>
+            <td>${comp.updatedBy || "N/A"}</td>
+          </tr>
+        `;
+      })
+      .join("");
 
-        // Save back to localStorage
-        if (type === "request") {
-          localStorage.setItem("requests", JSON.stringify(items));
-        } else if (type === "complaint") {
-          localStorage.setItem("complaints", JSON.stringify(items));
-        } else if (type === "blotter") {
-          localStorage.setItem("blotters", JSON.stringify(items));
-        }
+    // Populate blotters table
+    const blottersList = document.getElementById("admin-blotters-list");
+    blottersList.innerHTML = blotters
+      .map((blot) => {
+        const user = allUsers.find((u) => u.email === blot.email) || {};
+        return `
+          <tr>
+            <td>${blot.id}</td>
+            <td>${user.firstName || ""} ${user.lastName || ""}</td>
+            <td>${blot.incidentType}</td>
+            <td>${new Date(blot.date).toLocaleDateString()}</td>
+            <td class="status-${blot.status}">${blot.status}</td>
+            <td>${blot.updatedBy || "N/A"}</td>
+          </tr>
+        `;
+      })
+      .join("");
+  }
+  
+  // Store new notification
+  function addResidentNotification(email, subject, message) {
+    const current = JSON.parse(localStorage.getItem("residentNotifications") || "[]");
+    const newNotif = {
+      email,
+      subject,
+      message,
+      time: new Date().toLocaleString()
+    };
+    current.push(newNotif);
+    localStorage.setItem("residentNotifications", JSON.stringify(current));
 
-        alert("Status updated successfully!");
-        loadStaffDashboard();
-      }
+    // If resident is currently logged in and matches, show popup
+    const active = localStorage.getItem("loggedInResident");
+    if (active && active === email) {
+      alert(`📬 New Notification:\n${subject}\n${message}`);
+      showResidentNotifications(email); // Refresh panel
     }
-  });
+  }
+
+  // Display notifications for a resident
+  function showResidentNotifications(currentEmail) {
+    const notifList = document.getElementById("notif-list");
+    const notifCount = document.getElementById("notif-count");
+    const all = JSON.parse(localStorage.getItem("residentNotifications") || "[]");
+    const userNotifs = all.filter(n => n.email === currentEmail);
+
+    notifList.innerHTML = "";
+    if (userNotifs.length > 0) {
+      notifCount.textContent = userNotifs.length;
+      userNotifs.reverse().forEach(n => {
+        const li = document.createElement("li");
+        li.textContent = `${n.subject}: ${n.message} (${n.time})`;
+        notifList.appendChild(li);
+      });
+    } else {
+      notifList.innerHTML = "<li>No notifications.</li>";
+      notifCount.textContent = "0";
+    }
+  }
+
+  // Setup event listeners for notifications
+  const notifIcon = document.getElementById("notif-icon");
+  const notifPanel = document.getElementById("notif-panel");
+
+  // Toggle notification dropdown
+  if (notifIcon) {
+    notifIcon.addEventListener("click", () => {
+      notifPanel.style.display = notifPanel.style.display === "none" ? "block" : "none";
+    });
+  }
+
+  // Admin email form listener
+  const waitForAdminForm = setInterval(() => {
+    const emailForm = document.getElementById("email-form");
+    if (emailForm && !emailForm.dataset.listenerAdded) {
+      emailForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("resident-email").value.trim();
+        const subject = document.getElementById("email-subject").value.trim();
+        const message = document.getElementById("email-message").value.trim();
+
+        if (email && subject && message) {
+          addResidentNotification(email, subject, message);
+          alert(`📧 Simulated Email Sent to: ${email}`);
+          emailForm.reset();
+        } else {
+          alert("⚠️ Please fill all fields.");
+        }
+      });
+
+      emailForm.dataset.listenerAdded = "true";
+      clearInterval(waitForAdminForm);
+    }
+  }, 500);
 });
