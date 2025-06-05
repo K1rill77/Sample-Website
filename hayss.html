@@ -202,25 +202,32 @@
 
     <!-- Tracking Container -->
     <div class="container" id="tracking-container" style="display: none">
-      <div class="header">
-        <h1>My Submissions</h1>
-        <h2>Track your requests and complaints</h2>
-      </div>
-
-      <div class="nav-controls">
-        <button type="button" class="back-btn">Back</button>
-        <button type="button" class="logout-btn">Logout</button>
-      </div>
+      <header class="navbar">
+        <div class="nav-controls">
+          <button class="back-btn">
+            <img src="images/arrow-back.png" alt="Back">
+          </button>
+        </div>
+        <div class="website-name">Barangay Management System</div>
+        <div class="nav-controls">
+          <button class="notification-btn">
+            <img src="images/notification.png" alt="Notification">
+          </button>
+          <buton class="logout-btn">
+            <img src="images/logout.png" alt="Logout">
+          </buton>
+        </div>
+      </header>
 
       <div class="tracking-tabs">
         <button type="button" class="tab-btn active" data-tab="requests">
-          My Requests
+          Requests
         </button>
         <button type="button" class="tab-btn" data-tab="complaints">
-          My Complaints
+          Complaints
         </button>
         <button type="button" class="tab-btn" data-tab="blotters">
-          My Blotters
+          Others
         </button>
       </div>
 
@@ -278,14 +285,23 @@
     <!-- Request Form Container -->
     <div class="container" id="request-form-container">
       <header class="navbar">
-        <div class="menu-icon" id="mobile-menu">&#9776;</div>
+        <div class="nav-controls">
+          <button class="back-btn">
+            <img src="images/arrow-back.png" alt="Back">
+          </button>
+        </div>
         <nav class="nav-links" id="main-nav">
-          <a href="">Home</a>
-          <a href="#">Services</a>
+          <a href="">Status</a>
         </nav>
         <div class="website-name">Barangay Management System</div>
-        <div class="notification-icon">&#128276;</div>
-        <div class="user-icon">&#128100;</div>
+        <div class="nav-controls">
+          <button class="notification-btn">
+            <img src="images/notification.png" alt="Notification">
+          </button>
+          <buton class="logout-btn">
+            <img src="images/logout.png" alt="Logout">
+          </buton>
+        </div>
       </header>
 
       <div class="request-main-content">
@@ -343,10 +359,23 @@
     <!-- Complaint Form Container -->
     <div class="container" id="complaint-form-container">
       <header class="navbar">
-        <div class="nav-icon back-arrow">&#8592;</div>
+        <div class="nav-controls">
+          <button class="back-btn">
+            <img src="images/arrow-back.png" alt="Back">
+          </button>
+        </div>
+        <nav class="nav-links" id="main-nav">
+          <a href="">Status</a>
+        </nav>
         <div class="website-name">Barangay Management System</div>
-        <div class="notification-icon">&#128276;</div>
-        <div class="nav-icon forward-arrow">&#8594;</div>
+        <div class="nav-controls">
+          <button class="notification-btn">
+            <img src="images/notification.png" alt="Notification">
+          </button>
+          <buton class="logout-btn">
+            <img src="images/logout.png" alt="Logout">
+          </buton>
+        </div>
       </header>
 
       <div class="complaint-main-content">
@@ -399,10 +428,9 @@
               </div>
             </div>
 
-        <div class="form-submit-container">
-          <button type="submit">Submit</button>
-        </div>
-
+            <div class="form-submit-container">
+              <button type="submit">Submit</button>
+            </div>
           </form>
         </div>   
       </div>
@@ -411,115 +439,45 @@
     <!-- Blotter Form Container -->
     <div class="container" id="blotter-form-container">
       <header class="navbar">
-        <div class="nav-icon back-arrow">&#8592;</div>
+        <div class="nav-controls">
+          <button class="back-btn">
+            <img src="images/arrow-back.png" alt="Back">
+          </button>
+        </div>
+        <nav class="nav-links" id="main-nav">
+          <a href="">Status</a>
+        </nav>
         <div class="website-name">Barangay Management System</div>
-        <div class="notification-icon">&#128276;</div>
-        <div class="nav-icon forward-arrow">&#8594;</div>
+        <div class="nav-controls">
+          <button class="notification-btn">
+            <img src="images/notification.png" alt="Notification">
+          </button>
+          <buton class="logout-btn">
+            <img src="images/logout.png" alt="Logout">
+          </buton>
+        </div>
       </header>
 
       <div class="blotter-main-content">
-        <h2>Blotter Form</h2>
+        <h2>Other Services</h2>
 
         <div class="blotter-form-card">
           <form id="blotter-form">
-            <div class="form-group blotter">
-              <label for="mainComplaint">Main Complaint</label>
-              <input type="text" id="mainComplaint" name="mainComplaint" placeholder="">
-                <div class="checkbox-container">
-                  <input type="checkbox" id="mainComplaintNonResident" name="mainComplaintNonResident">
-                  <label for="mainComplaintNonResident">non-resident</label>
-                </div>
-            </div>
-
-            <div class="form-row four-cols-add-checkbox">
-              <div class="form-group flex-grow">
-                <label for="otherComplaintName">Other Complaint</label>
-                <input type="text" id="otherComplaintName" name="otherComplaintName" placeholder="">
-               
-                <button type="button" class="add-button">Add</button>
-
-                <div class="checkbox-container">
-                  <input type="checkbox" id="otherComplainantNonResident" name="otherComplainantNonResident">
-                  <label for="otherComplainantNonResident">non-resident</label>
-                </div>
-              </div>
-
-              <div class="form-group flex-grow">
-                <label for="respondentName">Respondents</label>
-                <input type="text" id="respondentName" name="respondentName" placeholder="">
-              
-                <button type="button" class="add-button">Add</button>
-
-                <div class="checkbox-container">
-                  <input type="checkbox" id="respondentNonResident" name="respondentNonResident">
-                  <label for="respondentNonResident">non-resident</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row four-cols-add-checkbox">
-              <div class="form-group flex-grow">
-                <label for="attacker">Attackers</label>
-                <input type="text" id="attackerName" name="attackerName" placeholder="">
-              
-                <button type="button" class="add-button">Add</button>
-            
-                <div class="checkbox-container">
-                  <input type="checkbox" id="attackerNonResident" name="attackerNonResident">
-                  <label for="attackerNonResident">non-resident</label>
-                </div>
-              </div>
-
-              <div class="form-group flex-grow">
-                <label for="victim">Victims</label>
-                <input type="text" id="victimName" name="victimName" placeholder="">
-              
-                <button type="button" class="add-button">Add</button>
-            
-                <div class="checkbox-container">
-                  <input type="checkbox" id="victimNonResident" name="victimNonResident">
-                  <label for="victimNonResident">non-resident</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row two-cols">
-              <div class="form-group blotter">
-                <label for="incidentLoc">Incident Location</label>
-                <input type="text" id="incidentLoc" name="incidentLoc">
-              </div>
-              <div class="form-group blotter">
-                <label for="incidentType">Incident Type</label>
-                <select id="incidentType" name="incidentType">
-                <option value="">Select incident type</option>
-                <option value="noise_complaint">Theft</option>
-                <option value="garbage_disposal">Assault</option>
-                <option value="safety_concern">Property Damage</option>
-                <option value="safety_concern">Other</option>
+            <div class="form-row single-col">
+              <div class="form-group full-width-select comp">
+                <label for="serviceType">Service Type</label>
+                <select id="serviceType" name="serviceType">
+                  <option value="">Select Service Type</option>
+                  <option value="noise_complaint">CHANGE</option>
+                  <option value="garbage_disposal">CHANGE</option>
+                  <option value="safety_concern">CHANGE</option>
                 </select>
               </div>
             </div>
 
-            <div class="form-row two-cols">
-              <div class="form-group blotter">
-                <label for="dateOfIncident">Date of Incident</label>
-                <input type="text" id="dateOfIncident" name="dateOfIncident">
-              </div>
-              <div class="form-group blotter">
-                <label for="timeOfIncident">Time of Incident</label>
-                <input type="text" id="timeOfIncident" name="timeOfIncident">
-              </div>
-            </div>
-
-            <div class="form-row two-cols">
-              <div class="form-group blotter">
-                <label for="dateReported">Date Reported</label>
-                <input type="text" id="dateReported" name="dateReported">
-              </div>
-              <div class="form-group blotter">
-                <label for="timeReported">Time Reported</label>
-                <input type="text" id="timeReported" name="timeReported">
-              </div>
+            <div class="form-group blotter">
+              <label for="details">Details</label>
+              <textarea id="details" rows="5" required></textarea>
             </div>
 
         <div class="form-submit-container">
@@ -579,13 +537,22 @@
 
     <!-- Staff Dashboard -->
     <div class="container" id="staff-dashboard" style="display: none">
-      <div class="header">
-        <h1>Barangay Staff Dashboard</h1>
-      </div>
-
-      <div class="nav-controls">
-        <button type="button" class="logout-btn">Logout</button>
-      </div>
+      <header class="navbar">
+        <div class="nav-controls">
+          <button class="back-btn">
+            <img src="images/arrow-back.png" alt="Back">
+          </button>
+        </div>
+        <div class="website-name">Barangay Management System</div>
+        <div class="nav-controls">
+          <button class="notification-btn">
+            <img src="images/notification.png" alt="Notification">
+          </button>
+          <buton class="logout-btn">
+            <img src="images/logout.png" alt="Logout">
+          </buton>
+        </div>
+      </header>
 
       <div class="dashboard">
         <div class="stats">
@@ -606,11 +573,10 @@
         </div>
 
         <div class="staff-actions">
-          <h2>Manage Submissions</h2>
           <div class="submission-tabs">
             <button type="button" class="tab-btn active" data-tab="requests">Requests</button>
             <button type="button" class="tab-btn" data-tab="complaints">Complaints</button>
-            <button type="button" class="tab-btn" data-tab="blotters">Blotters</button>
+            <button type="button" class="tab-btn" data-tab="blotters">Others</button>
           </div>
 
           <div class="submission-content">
@@ -674,13 +640,25 @@
 
     <!-- Admin Dashboard -->
     <div class="container" id="admin-dashboard" style="display: none">
-      <div class="header">
-        <h1>Admin Dashboard</h1>
-      </div>
-
-      <div class="nav-controls">
-        <button type="button" class="logout-btn">Logout</button>
-      </div>
+      <header class="navbar">
+        <div class="nav-controls">
+          <button class="back-btn">
+            <img src="images/arrow-back.png" alt="Back">
+          </button>
+        </div>
+        <nav class="nav-links" id="main-nav">
+          <a href="">Dashboard</a>
+        </nav>
+        <div class="website-name">Barangay Management System</div>
+        <div class="nav-controls">
+          <button class="notification-btn">
+            <img src="images/notification.png" alt="Notification">
+          </button>
+          <buton class="logout-btn">
+            <img src="images/logout.png" alt="Logout">
+          </buton>
+        </div>
+      </header>
 
       <div class="dashboard">
         <div class="stats">
@@ -699,43 +677,50 @@
             <p class="stat-value" id="pending-issues">0</p>
           </div>
         </div>
-
-        <div class="admin-actions">
-          <h2>Send Updates to Residents</h2>
-          <form id="email-form">
-            <div class="form-group">
-              <label for="resident-email">Resident Email</label>
-              <select id="resident-email" required>
-                <option value="">Select Resident</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="concern-type">Concern Type</label>
-              <select id="concern-type" required>
-                <option value="" selected disabled>Select Concern Type</option>
-                <option value="request">Request Update</option>
-                <option value="complaint">Complaint Update</option>
-                <option value="blotter">Blotter Update</option>
-                <option value="general">General Announcement</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="email-subject">Subject</label>
-              <input type="text" id="email-subject" required />
-            </div>
-
-            <div class="form-group">
-              <label for="email-message">Message</label>
-              <textarea id="email-message" rows="5" required></textarea>
-            </div>
-
-            <button type="submit" class="btn">Send Email</button>
-          </form>
-        </div>
       </div>
-    </div>
+    
+      
+        <div class="admin-main-content">
+          <h2>Send Updates to Residents</h2>
+
+          <div class="admin-form-card">
+            <form id="admin-form">
+              <div class="form-group admin">
+                <label for="resident-email">Resident Email</label>
+                <select id="resident-email" required>
+                  <option value="">Select Resident</option>
+                </select>
+              </div>
+
+              <div class="form-group admin">
+                <label for="concern-type">Concern Type</label>
+                <select id="concern-type" required>
+                  <option value="" selected disabled>Select Concern Type</option>
+                  <option value="request">Request Update</option>
+                  <option value="complaint">Complaint Update</option>
+                  <option value="blotter">Blotter Update</option>
+                  <option value="general">General Announcement</option>
+                </select>
+              </div>
+
+              <div class="form-group admin">
+                <label for="email-subject">Subject</label>
+                <input type="text" id="email-subject" required />
+              </div>
+
+              <div class="form-group admin">
+                <label for="email-message">Message</label>
+                <textarea id="email-message" rows="5" required></textarea>
+              </div>
+
+              <div class="form-submit-container">
+                <button type="submit">Send Email</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>  
+    </div>  
 
     <script src="copy.js"></script>
   </body>
