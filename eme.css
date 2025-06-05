@@ -1,4 +1,4 @@
-/* Import futuristic font */
+/* Import font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 /* General Reset */
@@ -17,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .container {
@@ -27,6 +27,7 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
+  display: flex;
 }
 
 .header {
@@ -63,7 +64,7 @@ body {
 
 .left-section {
   flex: 1.5;
-  background: url('C:\\Users\\asuz laptop\\OneDrive\\Documents\\GitHub\\Sample-Website\\images\\Longos-Malabon-City.png') no-repeat center center/cover;
+  background: url('images\\Longos-Malabon-City.png') no-repeat center center/cover;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -152,7 +153,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url('C:\\Users\\asuz laptop\\OneDrive\\Documents\\GitHub\\Sample-Website\\images\\Longos-Malabon-City.png') no-repeat center center/cover;
+  background: url('images\\Longos-Malabon-City.png') no-repeat center center/cover;
   color: white;
   text-align: center;
 }
@@ -192,7 +193,7 @@ body {
 .complaint-main-content, 
 .blotter-main-content {
   flex-grow: 1.5;
-  background: url('C:\\Users\\asuz laptop\\OneDrive\\Documents\\GitHub\\Sample-Website\\images\\bg.png') no-repeat center center;
+  background: url('images\\bg.png') no-repeat center center;
   background-size: cover;
   min-height: calc(100vh - 60px);
   display: flex;
@@ -237,7 +238,8 @@ body {
 }
 
 .navbar .menu-icon,
-.navbar .notification-icon, .navbar .nav-icon {
+.navbar .notification-icon, 
+.navbar .nav-icon {
   font-size: 1.8em;
   cursor: pointer;
   padding: 0 10px;
@@ -269,6 +271,13 @@ body {
   margin: 0 20px;
 }
 
+/* Mobile Menu Styles */
+#mobile-menu {
+  display: none;
+  cursor: pointer;
+  font-size: 1.8em;
+}
+
 /* Buttons */
 .button-group {
   display: flex;
@@ -286,9 +295,13 @@ body {
   font-weight: 700;
   font-size: 1.1em;
   padding: 15px 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.login-btn, .signup-btn:hover {
+.login-btn:hover, 
+.signup-btn:hover {
   background-color: #FFEA00;
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
@@ -332,6 +345,9 @@ body {
   font-weight: 700;
   font-size: 1.1em;
   padding: 15px 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .create-acc-btn:hover {
@@ -421,7 +437,9 @@ body {
 }
 
 /* Form Styling */
-.request-form-card, .complaint-form-card, .blotter-form-card {
+.request-form-card, 
+.complaint-form-card, 
+.blotter-form-card {
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -513,7 +531,9 @@ body {
   font-size: 1em;
 }
 
-.form-group.req, .form-group.comp, .form-group.blotter {
+.form-group.req, 
+.form-group.comp, 
+.form-group.blotter {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -696,12 +716,15 @@ textarea {
 .submission-table th {
   background-color: #1f2833;
   color: #66fcf1;
+  padding: 12px;
+  text-align: left;
 }
 
 .tracking-table td,
 .submission-table td {
   background-color: #0b0c10;
   color: white;
+  padding: 12px;
 }
 
 .status-pending { color: #f39c12; }
@@ -733,20 +756,193 @@ textarea {
   display: block;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .form-row {
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .container {
     flex-direction: column;
+    height: auto;
+    min-height: 100vh;
   }
-  .role-options, .service-options, .stats {
+
+  .left-section, .right-section {
+    flex: none;
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .left-section {
+    min-height: 300px;
+  }
+
+  .right-section {
+    padding: 40px 20px;
+  }
+
+  .role-card {
+    width: 80%;
+  }
+
+  .form-container {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .header-greeting {
+    font-size: 1.8em;
+  }
+
+  .header-instruction {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+  }
+
+  .role-card {
+    width: 90%;
+    padding: 15px 25px;
+    font-size: 1.1em;
+  }
+
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #B740FA;
+    z-index: 1000;
+    padding: 20px;
+  }
+
+  .navbar .nav-links a {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .navbar .nav-links.show {
+    display: flex;
+  }
+
+  #mobile-menu {
+    display: block;
+  }
+
+  .request-form-card, 
+  .complaint-form-card, 
+  .blotter-form-card {
+    padding: 30px;
+    width: 95%;
+    top: 0;
+  }
+
+  .request-main-content h2,
+  .complaint-main-content h2,
+  .blotter-main-content h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+  }
+
+  .service-card {
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .stats {
     flex-direction: column;
     align-items: center;
   }
-  .role-card, .service-card, .stat-card {
-    width: 100%;
+
+  .stat-card {
+    width: 80%;
+    margin-bottom: 15px;
   }
-  .tracking-table, .submission-table {
-    display: block;
-    overflow-x: auto;
+
+  .tracking-tabs, 
+  .submission-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
+  table {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .header-greeting {
+    font-size: 1.5em;
+  }
+
+  .role-card {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1em;
+  }
+
+  .form-container {
+    padding: 30px 20px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .login-btn, .create-acc-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row.two-cols .form-group,
+  .form-row.three-cols .form-group,
+  .form-row.four-cols-add-checkbox .form-group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .social-login-options {
+    flex-wrap: wrap;
+  }
+
+  .social-btn {
+    margin: 5px;
+  }
+
+  #signup-container .form-container {
+    padding: 30px 20px;
+    height: auto;
+  }
+
+  .tracking-table th, 
+  .tracking-table td,
+  .submission-table th,
+  .submission-table td {
+    padding: 8px 5px;
+    font-size: 0.8em;
   }
 }
